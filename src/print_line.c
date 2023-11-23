@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:02:30 by averin            #+#    #+#             */
-/*   Updated: 2023/11/23 18:25:37 by averin           ###   ########.fr       */
+/*   Updated: 2023/11/23 18:27:27 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ static int	sign(float a, float b)
 	return (-1);
 }
 
-int	do_add(float *error, float *v0, float dv, float sv)
+static int	do_add(float *error, float *v0, float dv, float sv)
 {
 	*error += dv;
 	*v0 += sv;
 	return (1);
 }
 
-void	do_line(float x[2], float y[2], t_data *data)
+static void	do_line(float x[2], float y[2], t_data *data)
 {
 	float	dx;
 	float	dy;
