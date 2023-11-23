@@ -4,20 +4,22 @@ CCFLAGS		= -Wall -Wextra -Werror -g3
 INCLUDES	= includes
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
-MLIX_DIR	= minilibx
-MLIX		= $(MLIX_DIR)/libmlx_Linux.a
-LIBS		= $(LIBFT) $(MLIX)
+MLX_DIR		= mlx
+MLX			= $(MLX_DIR)/libmlx_Linux.a
+MLX_ARGS	= -L mlx -lXext -lX11
+LIBS		= $(LIBFT) $(MLX)
 OBJ_DIR		= obj
 
-SRCS		= main.c
+SRCS		= $(addprefix src/, main.c print_line.c)
 OBJS		= ${addprefix $(OBJ_DIR)/, ${SRCS:.c=.o}}
 
 $(NAME): $(OBJS) $(LIBS)
 	@echo '* Assembling $@'
-	@$(CC) $(CCFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+	@$(CC) $(CCFLAGS) $(OBJS) $(LIBS) -o $(NAME) $(MLX_ARGS)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/src
 	@echo '- Compiling $<'
 	@$(CC) $(CCFLAGS) -c $< -o $@ -I $(INCLUDES)
 
@@ -41,21 +43,21 @@ fcleanlib:
 
 ####	MinilibX	####
 
-$(MLIX):
+$(MLX):
 	@echo '* Making MinilibX'
-	@make -C $(MLIX_DIR)
+	@make -C $(MLX_DIR)
 
-remlix:
+remlx:
 	@echo '* Remaking MinilibX'
-	@make re -C $(MLIX_DIR)
+	@make re -C $(MLX_DIR)
 
-cleanmlix:
+cleanmlx:
 	@echo '* Cleaning MinilibX'
-	@make clean -C $(MLIX_DIR)
+	@make clean -C $(MLX_DIR)
 
-fcleanmlix:
+fcleanmlx:
 	@echo '* Cleaning MinilibX'
-	@make fclean -C $(MLIX_DIR)
+	@make fclean -C $(MLX_DIR)
 
 ####    Project    ####
 
@@ -74,4 +76,4 @@ re: fclean $(NAME)
 norm:
 	norminette ${SRCS} | grep 'Error'
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re relib cleanlib fcleanlib remlx cleanmlx fcleanmlx
