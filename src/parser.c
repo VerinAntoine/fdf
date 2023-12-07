@@ -47,8 +47,8 @@ static int	parse_line(char *line, t_map *map, int x)
 	{
 		point = get_point(map, x, y);
 		point->x = x;
-		point->y = y;
-		point->z = ft_atoi(elements[y]);
+		point->y = ft_atoi(elements[y]);
+		point->z = y;
 	}
 	ft_free_split(elements);
 	return (TRUE);

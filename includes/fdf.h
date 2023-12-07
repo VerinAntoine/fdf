@@ -23,9 +23,9 @@
 
 typedef struct s_point
 {
-	int	x;
-	int	y;
-	int	z;
+	float	x;
+	float	y;
+	float	z;
 }	t_point;
 
 typedef struct s_matrix

@@ -21,43 +21,46 @@ double	rad(double deg)
 	return (deg * 3.14 / 180);
 }
 
-t_point	*vector_by_matrix(t_point *point, t_matrix matrix)
+t_point	vector_by_matrix(t_point point, t_matrix matrix)
 {
-	t_point	*result;
-
-	result = ft_calloc(1, sizeof(t_point));
-	if (!result)
-		return (NULL);
-	int	saves[3] = {point->x, point->y, point->z};
-	result->x = saves[0] * matrix.i.x + saves[1] * matrix.i.y + saves[2] * matrix.i.z;
-	result->y = saves[0] * matrix.j.x + saves[1] * matrix.j.y + saves[2] * matrix.j.z;
-	result->z = saves[0] * matrix.k.x + saves[1] * matrix.k.y + saves[2] * matrix.k.z;
-	return (result);
+	int	saves[3] = {point.x, point.y, point.z};
+	point.x = saves[0] * matrix.i.x + saves[1] * matrix.i.y + saves[2] * matrix.i.z;
+	point.y = saves[0] * matrix.j.x + saves[1] * matrix.j.y + saves[2] * matrix.j.z;
+	point.z = saves[0] * matrix.k.x + saves[1] * matrix.k.y + saves[2] * matrix.k.z;
+	return (point);
 }
 
-t_point	*do_maths(t_point *point)
+t_point	do_maths(t_point *point)
 {
+
+	double r = atan(sqrt(2));
 	t_matrix z = {
-		{cos(rad(45)), -sin(rad(45)), 0},
-		{sin(rad(45)),  cos(rad(45)), 0},
+		{cos(r), -sin(r), 0},
+		{sin(r),  cos(r), 0},
 		{0, 0, 1}
 	};
-	double deg = atan(sqrt(2));
+	r = rad(45);
 	t_matrix y = {
-		{0, 0, 1},
-		{0, cos(deg), -sin(deg)},
-		{0, sin(deg), cos(deg)}
+		{cos(r), 0, sin(r)},
+		{0, 1, 0},
+		{-sin(r), 0, cos(r)}
 	};
-	t_point	*p;
-	p = vector_by_matrix(point, z);
-	p = vector_by_matrix(point, y);
+	t_point	p;
+	p.x = point->x;
+	p.y = point->y;
+	p.z = point->z;
 
-	p->x *= 20;
-	p->y *= 20;
-	p->z *= 20;
+	printf("maths %f %f %f => \t", point->x, point->y, point->z);
+	p.x -= 1 * p.y;
+	p = vector_by_matrix(p, y);
+	p = vector_by_matrix(p, z);
+	p.x *= 20;
+	p.y *= 20;
+	p.z *= 20;
 
-	p->x += HEIGHT / 2;
-	p->y += WIDTH / 2;
+	p.x += HEIGHT / 2 - 100;
+	p.z += WIDTH / 2 - 100;
+	printf(" %f %f %f\n", p.x, p.y, p.z);
 
 	return (p);
 }
@@ -66,7 +69,7 @@ void	draw_lines(t_map *map, t_data *data)
 {
 	int		x;
 	int		y;
-	t_point	*point;
+	t_point	point;
 	t_point	*next;
 
 	x = -1;
@@ -80,10 +83,10 @@ void	draw_lines(t_map *map, t_data *data)
 
 			next = get_point(map, x - 1, y);
 			if (next)
-				print_line(*point, *do_maths(next), *data);
+				print_line(point, do_maths(next), *data);
 			next = get_point(map, x, y - 1);
 			if (next)
-				print_line(*point, *do_maths(next), *data);
+				print_line(point, do_maths(next), *data);
 		}
 	}
 }
@@ -106,6 +109,7 @@ int	main(int argc, char *argv[])
 		return (ft_printf("Usage: %s map.fdf\n", argv[0]), 0);
 	t_map	*map = parse(argv[1]);
 	printf("Loaded map of %d by %d (%d points)\n", map->heigth, map->width, map->heigth * map->width);
+	print_map(map);
 	t_data	data = {0};
 	data.map = map;
 

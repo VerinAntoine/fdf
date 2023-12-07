@@ -26,25 +26,29 @@ static int	ft_sign(int i)
 void	print_line(t_point p0, t_point p1, t_data data)
 {
 	// TODO: norming
-	// printf("Drawing line from %f %f to %f %f\n", p0.x, p0.y, p1.x, p1.y);
-	int	dx = ft_abs(p0.x - p1.x);
-	int	dy = ft_abs(p0.y - p1.y);
-	int	sx = -ft_sign(p0.x - p1.x);
-	int	sy = -ft_sign(p0.y - p1.y);
+	int x0 = p0.x;
+	int z0 = p0.z;
+	int x1 = p1.x;
+	int z1 = p1.z;
+	int	dx = ft_abs(x0 - x1);
+	int	dy = ft_abs(z0 - z1);
+	int	sx = -ft_sign(x0 - x1);
+	int	sy = -ft_sign(z0 - z1);
+	printf("Drawing line from %d %d to %d %d\n", x0, z0, x1, z1);
 	if (dy == 0)
 	{
-		while (p0.x != p1.x + sx)
+		while (x0 != x1 + sx)
 		{
-			mlx_pixel_put(data.mlx_ptr, data.window_ptr, p0.y, p0.x, 0xFFFFFF);
-			p0.x += sx;
+			mlx_pixel_put(data.mlx_ptr, data.window_ptr, z0, x0, 0xFFFFFF);
+			x0 += sx;
 		}
 	}
 	else if (dx == 0)
 	{
-		while (p0.y != p1.y + sy)
+		while (z0 != z1 + sy)
 		{
-			mlx_pixel_put(data.mlx_ptr, data.window_ptr, p0.y, p0.x, 0xFFFFFF);
-			p0.y += sy;
+			mlx_pixel_put(data.mlx_ptr, data.window_ptr, z0, x0, 0xFFFFFF);
+			z0 += sy;
 		}
 	}
 	else if (dx >= dy)
@@ -52,14 +56,14 @@ void	print_line(t_point p0, t_point p1, t_data data)
 		int slope = 2 * dy;
 		int error = -dx;
 		
-		while (p0.x != p1.x + sx)
+		while (x0 != x1 + sx)
 		{
-			p0.x += sx;
-			mlx_pixel_put(data.mlx_ptr, data.window_ptr, p0.x, p0.y, 0xFFFFFF);
+			x0 += sx;
+			mlx_pixel_put(data.mlx_ptr, data.window_ptr, z0, x0, 0xFFFFFF);
 			error += slope;
 			if (error >= 0)
 			{
-				p0.y += sy;
+				z0 += sy;
 				error += -2 * dx;
 			}
 		}
@@ -69,14 +73,14 @@ void	print_line(t_point p0, t_point p1, t_data data)
 		int slope = 2 * dx;
 		int error = -dy;
 
-		while (p0.y != p1.y + sy)
+		while (z0 != z1 + sy)
 		{
-			p0.y += sy;
-			mlx_pixel_put(data.mlx_ptr, data.window_ptr, p0.x, p0.y, 0xFFFFFF);
+			z0 += sy;
+			mlx_pixel_put(data.mlx_ptr, data.window_ptr, z0, x0, 0xFFFFFF);
 			error += slope;
 			if (error >= 0)
 			{
-				p0.x += sx;
+				x0 += sx;
 				error += -2 * dy;
 			}
 		}

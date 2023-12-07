@@ -36,7 +36,7 @@ void	print_map(t_map *map)
 	{
 		y = -1;
 		while (++y < map->width)
-			ft_printf("%d ", get_point(map, x, y)->z);
+			ft_printf("%d ", get_point(map, x, y)->y);
 		ft_printf("\n");
 	}
 }
