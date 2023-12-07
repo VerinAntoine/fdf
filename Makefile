@@ -6,11 +6,11 @@ LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 MLX_DIR		= mlx
 MLX			= $(MLX_DIR)/libmlx_Linux.a
-MLX_ARGS	= -L mlx -lXext -lX11
+MLX_ARGS	= -L mlx -lXext -lX11 -lm
 LIBS		= $(LIBFT) $(MLX)
 OBJ_DIR		= obj
 
-SRCS		= $(addprefix src/, main.c print_line.c)
+SRCS		= $(addprefix src/, main.c print_line.c parser.c map.c)
 OBJS		= ${addprefix $(OBJ_DIR)/, ${SRCS:.c=.o}}
 
 $(NAME): $(OBJS) $(LIBS)
