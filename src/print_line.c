@@ -6,65 +6,92 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:02:30 by averin            #+#    #+#             */
-/*   Updated: 2023/11/23 18:27:27 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/07 11:18:24 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <math.h>
+# include <stdio.h>
+# include <unistd.h>
 
-static float	abs(float f)
+static int	ft_abs(int i)
 {
-	if (f >= 0)
-		return (f);
-	return (-f);
+	if (i >= 0)
+		return (i);
+	return (-i);
 }
 
-static int	sign(float a, float b)
+static int	ft_sign(int i)
 {
-	if (a < b)
+	if (i < 0)
+		return (-1);
+	else if (i > 0)
 		return (1);
-	return (-1);
+	return (0);
 }
 
-static int	do_add(float *error, float *v0, float dv, float sv)
+void	print_line(t_point p0, t_point p1, t_data data)
 {
-	*error += dv;
-	*v0 += sv;
-	return (1);
-}
+	// float	x[2];
+	// float	y[2];
 
-static void	do_line(float x[2], float y[2], t_data *data)
-{
-	float	dx;
-	float	dy;
-	int		sx;
-	int		sy;
-	float	error;
-
-	dx = abs(x[1] - x[0]);
-	dy = -abs(y[1] - y[0]);
-	sx = sign(x[0], x[1]);
-	sy = sign(y[0], y[1]);
-	error = dx + dy;
-	while (x[0] != x[1] && y[0] != y[1])
+	// x[0] = p0.x;
+	// x[1] = p1.x;
+	// y[0] = p0.y;
+	// y[1] = p1.y;
+	// do_line(x, y, data);
+	int	dx = ft_abs(p0.x - p1.x);
+	int	dy = ft_abs(p0.y - p1.y);
+	int	sx = -ft_sign(p0.x - p1.x);
+	int	sy = -ft_sign(p0.y - p1.y);
+	if (dy == 0)
 	{
-		mlx_pixel_put(data->mlx_ptr, data->window_ptr, x[0], y[0], 0xFFFFFF);
-		if (2 * error >= dy && (x[0] == x[1] || !do_add(&error, &x[0], dy, sx)))
-			break ;
-		if (2 * error <= dx && (y[0] == y[1] || !do_add(&error, &y[0], dx, sy)))
-			break ;
+		while (p0.x != p1.x + sx)
+		{
+			mlx_pixel_put(data.mlx_ptr, data.window_ptr, p0.x, p0.y, 0xFFFFFF);
+			p0.x += sx;
+		}
 	}
-}
+	else if (dx == 0)
+	{
+		while (p0.y != p1.y + sy)
+		{
+			mlx_pixel_put(data.mlx_ptr, data.window_ptr, p0.x, p0.y, 0xFFFFFF);
+			p0.y += sy;
+		}
+	}
+	else if (dx >= dy)
+	{
+		int slope = 2 * dy;
+		int error = -dx;
+		
+		while (p0.x != p1.x + sx)
+		{
+			p0.x += sx;
+			mlx_pixel_put(data.mlx_ptr, data.window_ptr, p0.x, p0.y, 0xFFFFFF);
+			error += slope;
+			if (error >= 0)
+			{
+				p0.y += sy;
+				error += -2 * dx;
+			}
+		}
+	}
+	else
+	{
+		int slope = 2 * dx;
+		int error = -dy;
 
-void	print_line(t_line *line, t_data *data)
-{
-	float	x[2];
-	float	y[2];
-
-	x[0] = line->a->x;
-	x[1] = line->b->x;
-	y[0] = line->a->y;
-	y[1] = line->b->y;
-	do_line(x, y, data);
+		while (p0.y != p1.y + sy)
+		{
+			p0.y += sy;
+			mlx_pixel_put(data.mlx_ptr, data.window_ptr, p0.x, p0.y, 0xFFFFFF);
+			error += slope;
+			if (error >= 0)
+			{
+				p0.x += sx;
+				error += -2 * dy;
+			}
+		}
+	}
 }

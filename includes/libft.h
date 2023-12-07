@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:55:16 by averin            #+#    #+#             */
-/*   Updated: 2023/12/02 23:16:11 by antoine          ###   ########.fr       */
+/*   Updated: 2023/12/05 10:10:52 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_bzero(void *s, size_t n);
 
+size_t	ft_count_words(const char *s, char c);
 char	**ft_split(const char *s, char c);
 char	**ft_size_split(const char *s, char c, size_t *size);
 void	ft_free_split(char **s);
