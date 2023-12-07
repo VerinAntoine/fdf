@@ -6,20 +6,13 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:02:30 by averin            #+#    #+#             */
-/*   Updated: 2023/12/07 11:18:24 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/07 15:13:53 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 # include <stdio.h>
 # include <unistd.h>
-
-static int	ft_abs(int i)
-{
-	if (i >= 0)
-		return (i);
-	return (-i);
-}
 
 static int	ft_sign(int i)
 {
@@ -32,14 +25,8 @@ static int	ft_sign(int i)
 
 void	print_line(t_point p0, t_point p1, t_data data)
 {
-	// float	x[2];
-	// float	y[2];
-
-	// x[0] = p0.x;
-	// x[1] = p1.x;
-	// y[0] = p0.y;
-	// y[1] = p1.y;
-	// do_line(x, y, data);
+	// TODO: norming
+	// printf("Drawing line from %f %f to %f %f\n", p0.x, p0.y, p1.x, p1.y);
 	int	dx = ft_abs(p0.x - p1.x);
 	int	dy = ft_abs(p0.y - p1.y);
 	int	sx = -ft_sign(p0.x - p1.x);
@@ -48,7 +35,7 @@ void	print_line(t_point p0, t_point p1, t_data data)
 	{
 		while (p0.x != p1.x + sx)
 		{
-			mlx_pixel_put(data.mlx_ptr, data.window_ptr, p0.x, p0.y, 0xFFFFFF);
+			mlx_pixel_put(data.mlx_ptr, data.window_ptr, p0.y, p0.x, 0xFFFFFF);
 			p0.x += sx;
 		}
 	}
@@ -56,7 +43,7 @@ void	print_line(t_point p0, t_point p1, t_data data)
 	{
 		while (p0.y != p1.y + sy)
 		{
-			mlx_pixel_put(data.mlx_ptr, data.window_ptr, p0.x, p0.y, 0xFFFFFF);
+			mlx_pixel_put(data.mlx_ptr, data.window_ptr, p0.y, p0.x, 0xFFFFFF);
 			p0.y += sy;
 		}
 	}

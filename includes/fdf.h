@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:02:41 by averin            #+#    #+#             */
-/*   Updated: 2023/12/07 11:20:35 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/07 15:13:28 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,21 @@
 # include <stdio.h>
 
 # define WIDTH 800
-# define HEIGHT 800
+# define HEIGHT 600
 
 typedef struct s_point
 {
 	int	x;
 	int	y;
 	int	z;
-	int	u;
-	int	z;
 }	t_point;
+
+typedef struct s_matrix
+{
+	t_point	i;
+	t_point	j;
+	t_point	k;
+}	t_matrix;
 
 typedef struct s_map
 {
