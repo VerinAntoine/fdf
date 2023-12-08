@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:02:41 by averin            #+#    #+#             */
-/*   Updated: 2023/12/07 15:13:28 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/08 16:59:28 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,20 @@ typedef struct s_map
 	int		heigth;
 }	t_map;
 
+typedef struct s_view
+{
+	float	deg_x;
+	float	deg_y;
+	int		scale;
+	float	height;
+}	t_view;
+
 typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*window_ptr;
 	t_map	*map;
+	t_view	*view;
 }	t_data;
 
 t_map	*parse(char *filename);
