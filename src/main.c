@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:57:41 by averin            #+#    #+#             */
-/*   Updated: 2023/12/08 17:02:26 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/10 13:53:08 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,32 +32,35 @@ t_point	vector_by_matrix(t_point point, t_matrix matrix)
 
 t_point	do_maths(t_point *point, t_view	view)
 {
-	t_matrix z = {
-		{cos(view.deg_y), -sin(view.deg_y), 0},
-		{sin(view.deg_y),  cos(view.deg_y), 0},
-		{0, 0, 1}
+	t_matrix x = {
+		{1, 0, 0},
+		{0, cos(view.deg_x), -sin(view.deg_x)},
+		{0, sin(view.deg_x), cos(view.deg_x)}
 	};
 	t_matrix y = {
-		{cos(view.deg_x), 0, sin(view.deg_x)},
+		{cos(view.deg_y), 0, sin(view.deg_y)},
 		{0, 1, 0},
-		{-sin(view.deg_x), 0, cos(view.deg_x)}
+		{-sin(view.deg_y), 0, cos(view.deg_y)}
+	};
+	t_matrix z = {
+		{cos(view.deg_z), -sin(view.deg_z), 0},
+		{sin(view.deg_z),  cos(view.deg_z), 0},
+		{0, 0, 1}
 	};
 	t_point	p;
 	p.x = point->x;
 	p.y = point->y;
 	p.z = point->z;
 
-	printf("maths %f %f %f => \t", point->x, point->y, point->z);
-	p.x -= view.height * p.y;
-	p = vector_by_matrix(p, z);
-	p = vector_by_matrix(p, y);
 	p.x *= view.scale;
-	p.y *= view.scale;
+	p.y *= view.height;
 	p.z *= view.scale;
+	p = vector_by_matrix(p, x);
+	p = vector_by_matrix(p, y);
+	p = vector_by_matrix(p, z);
 
 	p.x += HEIGHT / 2 - 100;
 	p.z += WIDTH / 2 - 100;
-	printf(" %f %f %f\n", p.x, p.y, p.z);
 
 	return (p);
 }
@@ -75,7 +78,6 @@ void	draw_lines(t_map *map, t_data *data)
 		y = -1;
 		while (++y < map->width)
 		{
-			printf("call for %d %d\n", x, y);
 			point = do_maths(get_point(map, x, y), *data->view);
 
 			next = get_point(map, x - 1, y);
@@ -93,21 +95,25 @@ int	key_hook(int keycode, t_data *param)
 	if (keycode == XK_Escape)
 		mlx_loop_end(param->mlx_ptr);
 	else if (keycode == XK_w)
-		param->view->deg_x += .01f;
+		param->view->deg_x += .1f;
 	else if (keycode == XK_s)
-		param->view->deg_x -= .01f;
+		param->view->deg_x -= .1f;
 	else if (keycode == XK_a)
-		param->view->deg_y += .01f;
+		param->view->deg_y += .1f;
 	else if (keycode == XK_d)
-		param->view->deg_y -= .01f;
+		param->view->deg_y -= .1f;
+	else if (keycode == XK_q)
+		param->view->deg_z += .1f;
+	else if (keycode == XK_e)
+		param->view->deg_z -= .1f;
 	else if (keycode == XK_r)
 		param->view->scale -= 1;
 	else if (keycode == XK_f)
 		param->view->scale += 1;
 	else if (keycode == XK_t)
-		param->view->height -= .01f;
+		param->view->height -= .1f;
 	else if (keycode == XK_g)
-		param->view->height += .01f;
+		param->view->height += .1f;
 	mlx_clear_window(param->mlx_ptr, param->window_ptr);
 	draw_lines(param->map, param);
 	return (0);
@@ -124,8 +130,9 @@ int	main(int argc, char *argv[])
 	t_view	view = {0};
 	view.scale = 10;
 	view.deg_y = rad(45);
-	view.deg_x = atan(sqrt(2));
+	view.deg_z = atan(sqrt(2));
 	view.scale = 1;
+	view.height = 1;
 	data.view = &view;
 	data.map = map;
 

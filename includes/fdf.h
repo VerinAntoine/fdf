@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:02:41 by averin            #+#    #+#             */
-/*   Updated: 2023/12/08 16:59:28 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/09 09:16:46 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_view
 {
 	float	deg_x;
 	float	deg_y;
+	float	deg_z;
 	int		scale;
 	float	height;
 }	t_view;
