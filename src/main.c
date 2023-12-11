@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:57:41 by averin            #+#    #+#             */
-/*   Updated: 2023/12/10 13:53:08 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/11 12:38:12 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,36 @@ t_point	vector_by_matrix(t_point point, t_matrix matrix)
 t_point	do_maths(t_point *point, t_view	view)
 {
 	t_matrix x = {
-		{1, 0, 0},
-		{0, cos(view.deg_x), -sin(view.deg_x)},
-		{0, sin(view.deg_x), cos(view.deg_x)}
+		{1, 0, 0, 0, 0},
+		{0, cos(view.deg_x), -sin(view.deg_x), 0, 0},
+		{0, sin(view.deg_x), cos(view.deg_x), 0, 0}
 	};
 	t_matrix y = {
-		{cos(view.deg_y), 0, sin(view.deg_y)},
-		{0, 1, 0},
-		{-sin(view.deg_y), 0, cos(view.deg_y)}
+		{cos(view.deg_y), 0, sin(view.deg_y), 0, 0},
+		{0, 1, 0, 0, 0},
+		{-sin(view.deg_y), 0, cos(view.deg_y), 0, 0}
 	};
 	t_matrix z = {
-		{cos(view.deg_z), -sin(view.deg_z), 0},
-		{sin(view.deg_z),  cos(view.deg_z), 0},
-		{0, 0, 1}
+		{cos(view.deg_z), -sin(view.deg_z), 0, 0, 0},
+		{sin(view.deg_z),  cos(view.deg_z), 0, 0, 0},
+		{0, 0, 1, 0, 0}
 	};
 	t_point	p;
 	p.x = point->x;
 	p.y = point->y;
 	p.z = point->z;
-
 	p.x *= view.scale;
-	p.y *= view.height;
+	p.y *= view.height * view.scale;
 	p.z *= view.scale;
 	p = vector_by_matrix(p, x);
 	p = vector_by_matrix(p, y);
 	p = vector_by_matrix(p, z);
-
 	p.x += HEIGHT / 2 - 100;
 	p.z += WIDTH / 2 - 100;
+	point->u = p.x;
+	point->v = p.z;
 
-	return (p);
+	return (*point);
 }
 
 void	draw_lines(t_map *map, t_data *data)

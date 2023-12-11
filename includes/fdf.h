@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:02:41 by averin            #+#    #+#             */
-/*   Updated: 2023/12/09 09:16:46 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/11 08:51:57 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_point
 	float	x;
 	float	y;
 	float	z;
+	int		u;
+	int		v;
 }	t_point;
 
 typedef struct s_matrix
