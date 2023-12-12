@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:02:42 by averin            #+#    #+#             */
-/*   Updated: 2023/12/12 13:35:52 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/12 15:04:59 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 
 # define WIDTH 800
 # define HEIGHT 600
+# define AXIS_X 'x'
+# define AXIS_Y 'y'
+# define AXIS_Z 'z'
 
 typedef struct	s_vec3
 {
@@ -28,6 +31,13 @@ typedef struct	s_vec3
 	float	y;
 	float	z;
 }	t_vec3;
+
+typedef struct	s_matrix
+{
+	t_vec3	i;
+	t_vec3	j;
+	t_vec3	k;
+}	t_matrix;
 
 typedef struct	s_map
 {
@@ -49,6 +59,9 @@ int		create_window(t_data *data);
 void	delete_window(t_data data);
 
 void	init_hook(t_data *data);
+
+void	rotate(t_map *map, float deg, char axis);
+void	translate(t_map *map, t_vec3 v);
 
 t_map	*parse_map(char *filename);
 t_vec3	*get_point(t_map *map, size_t x, size_t y);
