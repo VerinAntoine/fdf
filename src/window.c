@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 09:00:56 by averin            #+#    #+#             */
-/*   Updated: 2023/12/12 12:02:51 by averin           ###   ########.fr       */
+/*   Created: 2023/12/12 09:01:11 by averin            #+#    #+#             */
+/*   Updated: 2023/12/12 10:11:31 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int main(int argc, char const *argv[])
+int	create_window(t_data *data)
 {
-	t_data	data;
+	data->mlx_ptr = mlx_init();
+	if (!data->mlx_ptr)
+		return (FALSE);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "FdF");
+	if (!data->win_ptr)
+		return (free(data->mlx_ptr), FALSE);
+	return (TRUE);
+}
 
-	if (argc != 2)
-		return (ft_dprintf(2, "Usage: %s <file.fdf>\n", argv[0]), 0);
-	
-	return 0;
+void	delete_window(t_data data)
+{
+	mlx_clear_window(data.mlx_ptr, data.win_ptr);
+	mlx_destroy_window(data.mlx_ptr, data.win_ptr);
+	free(data.mlx_ptr);
 }

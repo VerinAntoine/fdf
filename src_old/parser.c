@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:02:16 by averin            #+#    #+#             */
-/*   Updated: 2023/12/12 12:21:09 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/12 09:02:05 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ t_map	*parse(char *filename)
 	int		fd;
 	t_map	*map;
 
-	if (ft_strnstr(filename, ".fdf", ft_strlen(filename)) == NULL)
-		return (ft_dprintf(2, "Invalid file name\n"), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (ft_dprintf(2, "Invalid file name\n"), NULL);

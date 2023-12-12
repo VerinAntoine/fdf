@@ -10,7 +10,8 @@ MLX_ARGS	= -L mlx -lXext -lX11 -lm
 LIBS		= $(LIBFT) $(MLX)
 OBJ_DIR		= obj
 
-SRCS		= $(addprefix src/, main.c print_line.c parser.c map.c)
+SRCS		= $(addprefix src/, main.c parser.c)
+SRCS_O		= $(addprefix src_old/, main.c print_line.c parser.c map.c)
 OBJS		= ${addprefix $(OBJ_DIR)/, ${SRCS:.c=.o}}
 
 $(NAME): $(OBJS) $(LIBS)

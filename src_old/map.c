@@ -6,11 +6,11 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 11:45:13 by averin            #+#    #+#             */
-/*   Updated: 2023/12/07 14:59:53 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/12 09:02:03 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdfo.h"
 
 t_point	*get_point(t_map *map, int x, int y)
 {
