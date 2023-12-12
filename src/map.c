@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 09:01:11 by averin            #+#    #+#             */
-/*   Updated: 2023/12/12 13:27:33 by averin           ###   ########.fr       */
+/*   Created: 2023/12/05 11:45:13 by averin            #+#    #+#             */
+/*   Updated: 2023/12/12 12:53:26 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	create_window(t_data *data)
+t_vec3	*get_point(t_map *map, size_t x, size_t y)
 {
-	data->mlx_ptr = mlx_init();
-	if (!data->mlx_ptr)
-		return (FALSE);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "FdF");
-	if (!data->win_ptr)
-		return (free(data->mlx_ptr), FALSE);
-	return (TRUE);
+	if (x < 0 || x > map->height || y < 0 || y > map->width)
+		return (NULL);
+	return (&(map->points[map->width * x + y]));
 }
 
-void	delete_window(t_data data)
+void	free_map(t_map *map)
 {
-	mlx_clear_window(data.mlx_ptr, data.win_ptr);
-	mlx_destroy_window(data.mlx_ptr, data.win_ptr);
-	mlx_destroy_display(data.mlx_ptr);
-	free(data.mlx_ptr);
+	if (map->points)
+		free(map->points);
+	free(map);
 }

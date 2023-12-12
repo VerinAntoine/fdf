@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 09:01:11 by averin            #+#    #+#             */
-/*   Updated: 2023/12/12 13:27:33 by averin           ###   ########.fr       */
+/*   Created: 2023/12/12 13:02:15 by averin            #+#    #+#             */
+/*   Updated: 2023/12/12 13:37:38 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	create_window(t_data *data)
+int	handle_key(int keycode, t_data *data)
 {
-	data->mlx_ptr = mlx_init();
-	if (!data->mlx_ptr)
-		return (FALSE);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "FdF");
-	if (!data->win_ptr)
-		return (free(data->mlx_ptr), FALSE);
-	return (TRUE);
+	if (keycode == XK_Escape)
+		mlx_loop_end(data->mlx_ptr);
+	return (0);
 }
 
-void	delete_window(t_data data)
+int	destroy(t_data *data)
 {
-	mlx_clear_window(data.mlx_ptr, data.win_ptr);
-	mlx_destroy_window(data.mlx_ptr, data.win_ptr);
-	mlx_destroy_display(data.mlx_ptr);
-	free(data.mlx_ptr);
+	mlx_loop_end(data->mlx_ptr);
+	return (0);
+}
+
+void	init_hook(t_data *data)
+{
+	mlx_key_hook(data->win_ptr, handle_key, data);
+	mlx_hook(data->win_ptr, DestroyNotify, 0, destroy, data);
 }

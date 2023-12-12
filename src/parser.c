@@ -6,11 +6,11 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:02:16 by averin            #+#    #+#             */
-/*   Updated: 2023/12/12 12:21:09 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:42:29 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdfo.h"
+#include "fdf.h"
 
 static t_map	*get_map_info(int fd, t_map *map)
 {
@@ -28,7 +28,7 @@ static t_map	*get_map_info(int fd, t_map *map)
 		height++;
 		free(line);
 	}
-	map->heigth = height;
+	map->height = height;
 	map->width = width;
 	return (map);
 }
@@ -36,7 +36,7 @@ static t_map	*get_map_info(int fd, t_map *map)
 static int	parse_line(char *line, t_map *map, int x)
 {
 	char	**elements;
-	t_point	*point;
+	t_vec3	*point;
 	int		y;
 
 	y = -1;
@@ -60,7 +60,7 @@ static int	init_map(int fd, t_map *map)
 	size_t	x;
 
 	x = 0;
-	map->points = ft_calloc(map->heigth * map->width, sizeof(t_point));
+	map->points = ft_calloc(map->height * map->width, sizeof(t_vec3));
 	if (!map->points)
 		return (ft_dprintf(2, "Memory error\n"), FALSE);
 	while (oget_next_line(fd, &line))
@@ -72,19 +72,20 @@ static int	init_map(int fd, t_map *map)
 	return (TRUE);
 }
 
-t_map	*parse(char *filename)
+t_map	*parse_map(char *filename)
 {
 	int		fd;
 	t_map	*map;
 
-	if (ft_strnstr(filename, ".fdf", ft_strlen(filename)) == NULL)
+	if (ft_strncmp(
+			ft_strnstr(filename, ".fdf", ft_strlen(filename)), ".fdf", 4) != 0)
 		return (ft_dprintf(2, "Invalid file name\n"), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (ft_dprintf(2, "Invalid file name\n"), NULL);
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
-		return (ft_dprintf(2, "Memory error\n"), NULL);
+		return (close(fd), ft_dprintf(2, "Memory error\n"), NULL);
 	get_map_info(fd, map);
 	close(fd);
 	fd = open(filename, O_RDONLY);
