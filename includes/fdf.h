@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:02:42 by averin            #+#    #+#             */
-/*   Updated: 2023/12/12 15:04:59 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/13 12:49:35 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FDF_H
 
 # include <fcntl.h>
+# include <math.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include "libft.h"
@@ -24,6 +25,12 @@
 # define AXIS_X 'x'
 # define AXIS_Y 'y'
 # define AXIS_Z 'z'
+
+typedef struct	s_vec2
+{
+	int	x;
+	int	y;
+}	t_vec2;
 
 typedef struct	s_vec3
 {
@@ -48,6 +55,15 @@ typedef struct	s_map
 	int		max_height;
 }	t_map;
 
+typedef struct	t_img
+{
+	void	*addr;
+	char	*content;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_img;
+
 typedef struct	s_data
 {
 	void	*mlx_ptr;
@@ -57,6 +73,9 @@ typedef struct	s_data
 
 int		create_window(t_data *data);
 void	delete_window(t_data data);
+void	img_pixel_put(t_img *img, int x, int y, int color);
+
+void	draw_line(t_vec2 a, t_vec2 b, int colors[2], t_img *img);
 
 void	init_hook(t_data *data);
 

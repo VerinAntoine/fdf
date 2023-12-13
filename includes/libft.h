@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:55:16 by averin            #+#    #+#             */
-/*   Updated: 2023/12/05 10:10:52 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/13 10:24:05 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	ft_putnbr_fd(int n, int fd);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
 int		ft_abs(int i);
+int		ft_sign(int i);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);

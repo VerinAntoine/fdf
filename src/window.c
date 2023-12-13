@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:01:11 by averin            #+#    #+#             */
-/*   Updated: 2023/12/12 13:27:33 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/13 13:00:49 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,14 @@ void	delete_window(t_data data)
 	mlx_destroy_window(data.mlx_ptr, data.win_ptr);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
+}
+
+void	img_pixel_put(t_img *img, int x, int y, int color)
+{
+	char *pixel;
+
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+		return ;
+	pixel = img->content + (y * img->size_line + x * (img->bpp / 8));
+	*(int *)pixel = color;
 }
