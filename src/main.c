@@ -6,15 +6,16 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:00:56 by averin            #+#    #+#             */
-/*   Updated: 2023/12/14 14:54:55 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/14 17:19:29 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
-static t_vec2	project(t_vec3 point)
+static t_vec3	project(t_vec3 point)
 {
-	return ((t_vec2){point.z + WIDTH / 2, point.x + HEIGHT / 2});
+	return ((t_vec3){point.z + WIDTH / 2, point.y, point.x + HEIGHT / 2});
 }
 
 static void	draw_fdf(t_data data, t_img *img)
@@ -37,9 +38,10 @@ static void	draw_fdf(t_data data, t_img *img)
 			if (!a)
 				continue;
 			if (b)
-				draw_line(project(*a), project(*b), (int [2]){0, 0}, img);
+				draw_line(project(*a), project(*b), *data.map, img);
 			if (c)
-				draw_line(project(*a), project(*c), (int [2]){0, 0}, img);
+				draw_line(project(*a), project(*c), *data.map, img);
+			// read(0, NULL, 1);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:02:16 by averin            #+#    #+#             */
-/*   Updated: 2023/12/12 09:02:05 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/14 15:45:22 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ t_map	*parse(char *filename)
 	if (!init_map(fd, map))
 		return (free_map(map), NULL);
 	close(fd);
+	
 	return (map);
 }

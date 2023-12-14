@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:02:16 by averin            #+#    #+#             */
-/*   Updated: 2023/12/12 12:42:29 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/14 15:45:45 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ t_map	*parse_map(char *filename)
 	if (!init_map(fd, map))
 		return (free_map(map), NULL);
 	close(fd);
+	find_heights(map);
 	return (map);
 }

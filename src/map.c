@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 11:45:13 by averin            #+#    #+#             */
-/*   Updated: 2023/12/14 15:21:08 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/14 15:53:20 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,29 @@ void	free_map(t_map *map)
 
 void	find_heights(t_map *map)
 {
-	int	min;
-	int	max;
+	size_t	x;
+	size_t	y;
+	t_vec3	*point;
+	int		min;
+	int		max;
 
 	min = INT_MAX;
 	max = INT_MIN;
-
+	x = -1;
+	while (++x < map->height)
+	{
+		y = -1;
+		while (++y < map->width)
+		{
+			point = get_point(map, x, y);
+			if (point->y < min)
+				min = point->y;
+			if (point->y > max)
+				max = point->y;
+		}
+	}
+	map->max_height = max;
+	map->min_height = min;
 }
 
 void	calibrate_map(t_map *map)

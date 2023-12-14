@@ -10,7 +10,7 @@ MLX_ARGS	= -L mlx -lXext -lX11 -lm
 LIBS		= $(LIBFT) $(MLX)
 OBJ_DIR		= obj
 
-SRCS		= $(addprefix src/, main.c parser.c window.c map.c loop.c draw.c math.c)
+SRCS		= $(addprefix src/, main.c parser.c window.c map.c loop.c draw.c math.c color.c)
 SRCS_		= $(addprefix src_old/, main.c print_line.c parser.c map.c)
 OBJS		= ${addprefix $(OBJ_DIR)/, ${SRCS:.c=.o}}
 

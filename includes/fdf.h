@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:02:42 by averin            #+#    #+#             */
-/*   Updated: 2023/12/14 15:16:15 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/14 16:35:36 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int		create_window(t_data *data);
 void	delete_window(t_data data);
 void	img_pixel_put(t_img *img, int x, int y, int color);
 
-void	draw_line(t_vec2 a, t_vec2 b, int colors[2], t_img *img);
+// void	draw_line(t_vec2 a, t_vec2 b, int colors[2], t_img *img);
+void	draw_line(t_vec3 a, t_vec3 b, t_map map, t_img *img);
 
 void	init_hook(t_data *data);
 
@@ -84,11 +85,13 @@ void	translate(t_map *map, t_vec3 v);
 void	scale(t_map *map, t_vec3 v);
 
 int		lerp_color(int colors[2], int start, int end, int current);
+int		*get_colors(t_map map, int y0, int y1);
 
 t_map	*parse_map(char *filename);
 
 t_vec3	*get_point(t_map *map, size_t x, size_t y);
 void	free_map(t_map *map);
+void	find_heights(t_map *map);
 void	calibrate_map(t_map *map);
 
 #endif
