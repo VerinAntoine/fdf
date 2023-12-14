@@ -24,7 +24,7 @@ static void	draw_straight_line_x(int c[3], int s, int colors[2], t_img *img)
 	(void)colors;
 	while (c[0] != c[1])
 	{
-		img_pixel_put(img, c[2], c[0], 0xFFFFFF);
+		img_pixel_put(img, c[0], c[2], 0xFFFFFF);
 		c[0] += s;
 	}
 }
@@ -41,15 +41,15 @@ static void	draw_straight_line_y(int c[3], int s, int colors[2], t_img *img)
 	(void)colors;
 	while (c[0] != c[1])
 	{
-		img_pixel_put(img, c[0], c[0], 0xFFFFFF);
+		img_pixel_put(img, c[2], c[0], 0xFFFFFF);
 		c[0] += s;
 	}
 }
 
 /**
  * Draw a diagonal line on the x octant
- * @param c Array of the coordonates of the line
- * @param ds Array of slope and sign of the line
+ * @param c Array of the coordonates of the line [a.x, b.x, a.y]
+ * @param ds Array of slope and sign of the line [dx, dy, sx, sy]
  * @param colors Array of the gradient to create on the line
  * @param img Pointer to image in wich draw the line
 */
@@ -63,21 +63,21 @@ static void	draw_diagonal_line_x(int c[3], int ds[4], int colors[2], t_img *img)
 	error = -ds[0];
 	while (c[0] != c[1])
 	{
-		c[0] += ds[3];
-		img_pixel_put(img, c[2], c[0], 0xFFFFFF);
+		c[0] += ds[2];
+		img_pixel_put(img, c[0], c[2], 0xFFFFFF);
 		error += slope;
 		if (error >= 0)
 		{
 			c[2] += ds[3];
-			error += -2 * ds[2];
+			error += -2 * ds[0];
 		}
 	}
 }
 
 /**
  * Draw a diagonal line on the y octant
- * @param c Array of the coordonates of the line
- * @param ds Array of slope and sign of the line
+ * @param c Array of the coordonates of the line [a.y, b.y, a.x]
+ * @param ds Array of slope and sign of the line [dx, dy, sx, sy]
  * @param colors Array of the gradient to create on the line
  * @param img Pointer to image in wich draw the line
 */
@@ -87,17 +87,17 @@ static void	draw_diagonal_line_y(int c[3], int ds[4], int colors[2], t_img *img)
 	int	error;
 
 	(void)colors;
-	slope = 2 * ds[1];
-	error = -ds[0];
+	slope = 2 * ds[0];
+	error = -ds[1];
 	while (c[0] != c[1])
 	{
 		c[0] += ds[3];
-		img_pixel_put(img, c[0], c[2], 0xFFFFFF);
+		img_pixel_put(img, c[2], c[0], 0xFFFFFF);
 		error += slope;
 		if (error >= 0)
 		{
-			c[2] += ds[3];
-			error += -2 * ds[2];
+			c[2] += ds[2];
+			error += -2 * ds[1];
 		}
 	}
 }

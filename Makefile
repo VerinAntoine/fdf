@@ -10,7 +10,7 @@ MLX_ARGS	= -L mlx -lXext -lX11 -lm
 LIBS		= $(LIBFT) $(MLX)
 OBJ_DIR		= obj
 
-SRCS		= $(addprefix src/, main.c parser.c window.c map.c loop.c print.c math.c)
+SRCS		= $(addprefix src/, main.c parser.c window.c map.c loop.c draw.c math.c)
 SRCS_O		= $(addprefix src_old/, main.c print_line.c parser.c map.c)
 OBJS		= ${addprefix $(OBJ_DIR)/, ${SRCS:.c=.o}}
 
@@ -76,5 +76,8 @@ re: fclean $(NAME)
 
 norm:
 	norminette ${SRCS} | grep 'Error'
+
+r: $(NAME)
+	./fdf test_maps/42.fd
 
 .PHONY: all clean fclean re relib cleanlib fcleanlib remlx cleanmlx fcleanmlx

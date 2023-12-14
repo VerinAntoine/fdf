@@ -14,7 +14,7 @@
 
 t_vec3	*get_point(t_map *map, size_t x, size_t y)
 {
-	if (x < 0 || x > map->height || y < 0 || y > map->width)
+	if (x > map->height || y > map->width)
 		return (NULL);
 	return (&(map->points[map->width * x + y]));
 }
