@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:28:36 by averin            #+#    #+#             */
-/*   Updated: 2023/12/12 14:59:18 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/14 14:44:27 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,26 @@ void	translate(t_map *map, t_vec3 v)
 			point->x += v.x;
 			point->y += v.y;
 			point->z += v.z;
+		}
+	}
+}
+
+void	scale(t_map *map, t_vec3 v)
+{
+	size_t	x;
+	size_t	y;
+	t_vec3	*point;
+
+	x = -1;
+	while (++x < map->height)
+	{
+		y = -1;
+		while (++y < map->width)
+		{
+			point = get_point(map, x, y);
+			point->x *= v.x;
+			point->y *= v.y;
+			point->z *= v.z;
 		}
 	}
 }

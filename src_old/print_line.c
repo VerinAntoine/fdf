@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:02:30 by averin            #+#    #+#             */
-/*   Updated: 2023/12/13 12:43:13 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/14 15:11:18 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,12 @@
 # include <stdio.h>
 # include <unistd.h>
 
-static int	ft_sign(int i)
-{
-	if (i < 0)
-		return (-1);
-	else if (i > 0)
-		return (1);
-	return (0);
-}
-
 int	lerp_color(int start, int end, float i)
 {
 	int r = (start & 0xff0000) * (1 - i) + (end & 0xff0000) * i;
 	int g = (start & 0x00ff00) * (1 - i) + (end & 0x00ff00) * i;
 	int b = (start & 0x0000ff) * (1 - i) + (end & 0x0000ff) * i;
 	return ((r & 0xff0000) | (g & 0x00ff00) | (b & 0x0000ff));
-}
-
-int	lerp(int start, int end, float i)
-{
-	return (1 - i) * start + i * end;
 }
 
 int	plop(int hmax, int hmin, int height)

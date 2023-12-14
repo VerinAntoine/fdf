@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:02:42 by averin            #+#    #+#             */
-/*   Updated: 2023/12/13 12:49:35 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/14 15:16:15 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,14 @@ void	init_hook(t_data *data);
 
 void	rotate(t_map *map, float deg, char axis);
 void	translate(t_map *map, t_vec3 v);
+void	scale(t_map *map, t_vec3 v);
+
+int		lerp_color(int colors[2], int start, int end, int current);
 
 t_map	*parse_map(char *filename);
+
 t_vec3	*get_point(t_map *map, size_t x, size_t y);
 void	free_map(t_map *map);
+void	calibrate_map(t_map *map);
 
 #endif

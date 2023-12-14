@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:01:11 by averin            #+#    #+#             */
-/*   Updated: 2023/12/13 13:00:49 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/14 13:09:13 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	delete_window(t_data data)
 
 void	img_pixel_put(t_img *img, int x, int y, int color)
 {
-	char *pixel;
+	char	*pixel;
 
 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 		return ;
