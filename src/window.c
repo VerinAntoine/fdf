@@ -40,3 +40,17 @@ void	img_pixel_put(t_img *img, int x, int y, int color)
 	pixel = img->content + (y * img->size_line + x * (img->bpp / 8));
 	*(int *)pixel = color;
 }
+
+void	create_img(t_data data)
+{
+	t_img	img;
+
+	img.addr = mlx_new_image(data.mlx_ptr, WIDTH, HEIGHT);
+	if (!img.addr)
+		return ;
+	img.content = mlx_get_data_addr(img.addr, &img.bpp, &img.size_line,
+			&img.endian);
+	draw_fdf(data, &img);
+	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, img.addr, 0, 0);
+	mlx_destroy_image(data.mlx_ptr, img.addr);
+}

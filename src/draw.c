@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 /**
  * Draw a straight line on x axis
@@ -106,19 +105,17 @@ static void	draw_diagonal_line_y(int c[4], int ds[4], int *colors, t_img *img)
  * @param colors Array of two colors for create a gradient on the line
  * @param img Pointer to image in wich draw the line
 */
-void	draw_line(t_vec3 a, t_vec3 b, t_map map, t_img *img)
+void	draw_line(t_vec3 a, t_vec3 b, int *colors, t_img *img)
 {
 	int	ds[4];
-	int	*colors;
 
-	colors = get_colors(map, a.y, b.y);
-	printf("line from %f %f %f to %f %f %f\n", a.x, a.y, a.z, b.x, b.y, b.z);
-	printf("dl: colors: %x %x\n", colors[0], colors[1]);
 	ds[0] = ft_abs(a.x - b.x);
 	ds[1] = ft_abs(a.z - b.z);
 	ds[2] = -ft_sign(a.x - b.x);
 	ds[3] = -ft_sign(a.z - b.z);
-	if (ds[1] == 0)
+	if (ds[0] == 0 && ds[1] == 0)
+		img_pixel_put(img, a.x, a.z, colors[0]);
+	else if (ds[1] == 0)
 		draw_straight_line_x((int [4]){a.x, b.x, a.z, a.x}, ds[2], colors, img);
 	else if (ds[0] == 0)
 		draw_straight_line_y((int [4]){a.z, b.z, a.x, a.z}, ds[3], colors, img);

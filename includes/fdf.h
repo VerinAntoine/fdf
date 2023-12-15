@@ -46,6 +46,15 @@ typedef struct	s_matrix
 	t_vec3	k;
 }	t_matrix;
 
+typedef struct	s_view
+{
+	int		deg_x;
+	int		deg_y;
+	int		deg_z;
+	int		scale;
+	float	height;
+}	t_view;
+
 typedef struct	s_map
 {
 	t_vec3	*points;
@@ -69,14 +78,17 @@ typedef struct	s_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_map	*map;
+	t_view	*view;
 }	t_data;
+
+void	draw_fdf(t_data data, t_img *img);
 
 int		create_window(t_data *data);
 void	delete_window(t_data data);
 void	img_pixel_put(t_img *img, int x, int y, int color);
+void	create_img(t_data data);
 
-// void	draw_line(t_vec2 a, t_vec2 b, int colors[2], t_img *img);
-void	draw_line(t_vec3 a, t_vec3 b, t_map map, t_img *img);
+void	draw_line(t_vec3 a, t_vec3 b, int *colors, t_img *img);
 
 void	init_hook(t_data *data);
 
@@ -84,8 +96,8 @@ void	rotate(t_map *map, float deg, char axis);
 void	translate(t_map *map, t_vec3 v);
 void	scale(t_map *map, t_vec3 v);
 
-int		lerp_color(int colors[2], int start, int end, int current);
-int		*get_colors(t_map map, int y0, int y1);
+int		lerp_color(int *colors, int start, int end, int current);
+void	get_colors(t_map map, int y0, int y1, int *colors);
 
 t_map	*parse_map(char *filename);
 
@@ -93,5 +105,6 @@ t_vec3	*get_point(t_map *map, size_t x, size_t y);
 void	free_map(t_map *map);
 void	find_heights(t_map *map);
 void	calibrate_map(t_map *map);
+t_map	*duplicate_map(t_map *map);
 
 #endif

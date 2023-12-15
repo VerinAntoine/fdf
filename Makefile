@@ -77,7 +77,4 @@ re: fclean $(NAME)
 norm:
 	norminette ${SRCS} | grep 'Error'
 
-r: $(NAME)
-	./fdf test_maps/42.fd
-
 .PHONY: all clean fclean re relib cleanlib fcleanlib remlx cleanmlx fcleanmlx

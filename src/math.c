@@ -105,6 +105,6 @@ void	rotate(t_map *map, float deg, char axis)
 		y = -1;
 		while (++y < map->width)
 			vector_by_matrix(get_point(map, x, y),
-				get_matrix(axis, deg / 180 * 1.14));
+				get_matrix(axis, deg * 3.14 / 180));
 	}
 }

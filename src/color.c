@@ -11,8 +11,14 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
+/**
+ * Linear interpolation of two colors
+ * @param colors Array of the two colors to interpolate
+ * @param start The start point of the interpolation
+ * @param end The end point of the interpolation
+ * @param current The current point of the interpolation
+*/
 int	lerp_color(int *colors, int start, int end, int current)
 {
 	int		r;
@@ -24,16 +30,20 @@ int	lerp_color(int *colors, int start, int end, int current)
 	r = (colors[0] & 0xff0000) * (1 - i) + (colors[1] & 0xff0000) * i;
 	g = (colors[0] & 0x00ff00) * (1 - i) + (colors[1] & 0x00ff00) * i;
 	b = (colors[0] & 0x0000ff) * (1 - i) + (colors[1] & 0x0000ff) * i;
-	// printf("from %x to %x with %f\n", colors[0], colors[1], i);
 	return ((r & 0xff0000) | (g & 0x00ff00) | (b & 0x0000ff));
 }
 
-int	*get_colors(t_map map, int y0, int y1)
+/**
+ * Get the gradient for the line between two points
+ * @param map The map
+ * @param y0 The y coordonate of the first point
+ * @param y1 The y coordonate of the second point
+ * @param colors Array of two to store the colors
+*/
+void	get_colors(t_map map, int y0, int y1, int *colors)
 {
-	return ((int [2]){
-		lerp_color((int [2]){0xffffff, 0xff0000}, map.min_height,
-		map.max_height, y0),
-		lerp_color((int [2]){0xffffff, 0xff0000}, map.min_height,
-		map.max_height, y1)
-	});
+	colors[0] = lerp_color((int [2]){0xffffff, 0xff0000}, map.min_height,
+			map.max_height, y0);
+	colors[1] = lerp_color((int [2]){0xffffff, 0xff0000}, map.min_height,
+			map.max_height, y1);
 }
