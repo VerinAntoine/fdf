@@ -76,6 +76,6 @@ re: fclean $(NAME)
 norm:
 	@echo '* Norminette'
 	make -C $(LIBFT_DIR) norm
-	norminette $(SRCS) $(INCLUDES) | grep 'Error'
+	norminette $(SRCS) $(INCLUDES)
 
 .PHONY: all clean fclean re relib cleanlib fcleanlib remlx cleanmlx fcleanmlx
