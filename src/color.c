@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:03:39 by averin            #+#    #+#             */
-/*   Updated: 2023/12/14 17:24:04 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/15 16:13:50 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	lerp_color(int *colors, int start, int end, int current)
 	int		b;
 	float	i;
 
+	if (start == end)
+		return (colors[0]);
 	i = (current - start) * 1.0f / (end - start);
 	r = (colors[0] & 0xff0000) * (1 - i) + (colors[1] & 0xff0000) * i;
 	g = (colors[0] & 0x00ff00) * (1 - i) + (colors[1] & 0x00ff00) * i;
