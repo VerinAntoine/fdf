@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 11:45:13 by averin            #+#    #+#             */
-/*   Updated: 2023/12/14 15:53:20 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/15 12:59:18 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,4 @@ void	calibrate_map(t_map *map)
 {
 	translate(map, (t_vec3){((int)map->height / 2) * -1.0f, 0,
 		((int)map->width / 2) * -1.0f});
-	// scale(map, (t_vec3){HEIGHT / map->height * 0.5f, 1,
-	// 	WIDTH / map->width * 0.5f});
 }

@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:00:56 by averin            #+#    #+#             */
-/*   Updated: 2023/12/14 17:19:29 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/15 12:59:40 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ static void	draw_lines(t_map *origin, t_map *map, size_t c[2], t_img *img)
 	if (points[1])
 	{
 		get_colors(*origin, get_point(origin, c[0], c[1])->y,
-				get_point(origin, c[0] - 1, c[1])->y, colors);
+			get_point(origin, c[0] - 1, c[1])->y, colors);
 		draw_line(project(*points[0]), project(*points[1]), colors, img);
 	}
 	if (points[2])
 	{
 		get_colors(*origin, get_point(origin, c[0], c[1])->y,
-				get_point(origin, c[0], c[1] - 1)->y, colors);
+			get_point(origin, c[0], c[1] - 1)->y, colors);
 		draw_line(project(*points[0]), project(*points[2]), colors, img);
 	}
 }
@@ -50,7 +50,7 @@ void	draw_fdf(t_data data, t_img *img)
 
 	map = duplicate_map(data.map);
 	scale(map, (t_vec3){data.view->scale, data.view->height
-			* data.view->scale,data.view->scale});
+		* data.view->scale, data.view->scale});
 	rotate(map, data.view->deg_x, AXIS_X);
 	rotate(map, data.view->deg_y, AXIS_Y);
 	rotate(map, data.view->deg_z, AXIS_Z);
