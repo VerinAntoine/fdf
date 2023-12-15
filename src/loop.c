@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:02:15 by averin            #+#    #+#             */
-/*   Updated: 2023/12/15 12:59:06 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/15 13:01:45 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	handle_key_next(int keycode, t_data *data)
 {
-	if (keycode == XK_Down)
-		translate(data->map, (t_vec3){-1, 0, 0});
 	if (keycode == XK_Up)
+		translate(data->map, (t_vec3){-1, 0, 0});
+	if (keycode == XK_Down)
 		translate(data->map, (t_vec3){1, 0, 0});
 	if (keycode == XK_Left)
 		translate(data->map, (t_vec3){0, 0, -1});
