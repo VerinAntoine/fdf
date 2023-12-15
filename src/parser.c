@@ -6,11 +6,12 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:02:16 by averin            #+#    #+#             */
-/*   Updated: 2023/12/14 15:45:45 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/15 16:04:50 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 static t_map	*get_map_info(int fd, t_map *map)
 {
@@ -33,11 +34,11 @@ static t_map	*get_map_info(int fd, t_map *map)
 	return (map);
 }
 
-static int	parse_line(char *line, t_map *map, int x)
+static int	parse_line(char *line, t_map *map, size_t x)
 {
 	char	**elements;
 	t_vec3	*point;
-	int		y;
+	size_t	y;
 
 	y = -1;
 	elements = ft_split(line, ' ');
@@ -77,9 +78,8 @@ t_map	*parse_map(char *filename)
 	int		fd;
 	t_map	*map;
 
-	if (ft_strncmp(
-			ft_strnstr(filename, ".fdf", ft_strlen(filename)), ".fdf", 4) != 0)
-		return (ft_dprintf(2, "Invalid file name\n"), NULL);
+	if (ft_strncmp(ft_strrchr(filename, '.'), ".fdf", 4) != 0)
+		return (ft_dprintf(2, "Invalid file type\n"), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (ft_dprintf(2, "Invalid file name\n"), NULL);

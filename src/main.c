@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:00:56 by averin            #+#    #+#             */
-/*   Updated: 2023/12/15 12:59:40 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/15 16:08:28 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		return (ft_dprintf(2, "Usage: %s <file.fdf>\n", argv[0]), -1);
 	data.map = parse_map(argv[1]);
-	init_view(&view, ft_max(data.map->width, data.map->height));
-	data.view = &view;
 	if (!data.map)
 		return (-2);
+	init_view(&view, ft_max(data.map->width, data.map->height));
+	data.view = &view;
 	if (!create_window(&data))
 		return (free_map(data.map), ft_dprintf(2, "Couldn't create window\n"), \
 		-3);
