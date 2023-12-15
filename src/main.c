@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:00:56 by averin            #+#    #+#             */
-/*   Updated: 2023/12/15 16:08:28 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/15 16:40:07 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	draw_fdf(t_data data, t_img *img)
 static void	init_view(t_view *view, int size)
 {
 	view->deg_x = 0;
-	view->deg_y = 0;
-	view->deg_z = 0;
+	view->deg_y = 45;
+	view->deg_z = 10;
 	view->scale = ft_max(HEIGHT, WIDTH) / size * 0.5f;
 	view->height = 1;
 }

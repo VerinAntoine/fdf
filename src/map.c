@@ -6,12 +6,19 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 11:45:13 by averin            #+#    #+#             */
-/*   Updated: 2023/12/15 12:59:18 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/15 16:30:29 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * Get the point at the given coordonates
+ * @param map The map
+ * @param x The x coordonate
+ * @param y The y coordonate
+ * @return The point at the given coordonates
+*/
 t_vec3	*get_point(t_map *map, size_t x, size_t y)
 {
 	if (x > map->height || y > map->width)
@@ -19,6 +26,10 @@ t_vec3	*get_point(t_map *map, size_t x, size_t y)
 	return (&(map->points[map->width * x + y]));
 }
 
+/**
+ * Free the map
+ * @param map The map to free
+*/
 void	free_map(t_map *map)
 {
 	if (map->points)
@@ -26,6 +37,10 @@ void	free_map(t_map *map)
 	free(map);
 }
 
+/**
+ * Find the min and max height of the map
+ * @param map The map
+*/
 void	find_heights(t_map *map)
 {
 	size_t	x;
@@ -87,6 +102,10 @@ t_map	*duplicate_map(t_map *map)
 	return (new_map);
 }
 
+/**
+ * Translate the map to set the center at the origin
+ * @param map The map to translate
+*/
 void	calibrate_map(t_map *map)
 {
 	translate(map, (t_vec3){((int)map->height / 2) * -1.0f, 0,

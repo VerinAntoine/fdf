@@ -11,7 +11,6 @@ LIBS		= $(LIBFT) $(MLX)
 OBJ_DIR		= obj
 
 SRCS		= $(addprefix src/, main.c parser.c window.c map.c loop.c draw.c math.c color.c)
-SRCS_		= $(addprefix src_old/, main.c print_line.c parser.c map.c)
 OBJS		= ${addprefix $(OBJ_DIR)/, ${SRCS:.c=.o}}
 
 $(NAME): $(OBJS) $(LIBS)
@@ -75,6 +74,8 @@ fclean: clean
 re: fclean $(NAME)
 
 norm:
-	norminette ${SRCS} | grep 'Error'
+	@echo '* Norminette'
+	make -C $(LIBFT_DIR) norm
+	norminette $(SRCS) $(INCLUDES) | grep 'Error'
 
 .PHONY: all clean fclean re relib cleanlib fcleanlib remlx cleanmlx fcleanmlx

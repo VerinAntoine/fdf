@@ -6,12 +6,17 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:28:36 by averin            #+#    #+#             */
-/*   Updated: 2023/12/14 14:44:27 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/15 16:42:29 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * Multiply a vector by a matrix
+ * @param point The vector to multiply
+ * @param matrix The matrix to multiply
+ */
 static void	vector_by_matrix(t_vec3 *point, t_matrix matrix)
 {
 	int	saves[3];

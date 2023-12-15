@@ -6,12 +6,17 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:01:11 by averin            #+#    #+#             */
-/*   Updated: 2023/12/14 13:09:13 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/15 16:33:16 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * Create the window
+ * @param data The data of fdf
+ * @return TRUE if the window is created, FALSE otherwise
+ */
 int	create_window(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
@@ -23,6 +28,10 @@ int	create_window(t_data *data)
 	return (TRUE);
 }
 
+/**
+ * Delete the window
+ * @param data The data of fdf
+ */
 void	delete_window(t_data data)
 {
 	mlx_clear_window(data.mlx_ptr, data.win_ptr);
@@ -31,6 +40,13 @@ void	delete_window(t_data data)
 	free(data.mlx_ptr);
 }
 
+/**
+ * Put a pixel in the image
+ * @param img The image in wich put the pixel
+ * @param x The x coordonate of the pixel
+ * @param y The y coordonate if the pixel
+ * @param color The color of the pixel
+ */
 void	img_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
@@ -41,6 +57,10 @@ void	img_pixel_put(t_img *img, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
+/**
+ * Create and draw the image
+ * @param data The data of fdf
+ */
 void	create_img(t_data data)
 {
 	t_img	img;

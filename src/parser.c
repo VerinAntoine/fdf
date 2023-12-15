@@ -6,13 +6,20 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:02:16 by averin            #+#    #+#             */
-/*   Updated: 2023/12/15 16:04:50 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/15 16:38:54 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
+/**
+ * Get the point at the given coordonates
+ * @param map The map
+ * @param x The x coordonate
+ * @param y The y coordonate
+ * @return The point at the given coordonates
+ */
 static t_map	*get_map_info(int fd, t_map *map)
 {
 	char	*line;
@@ -34,6 +41,13 @@ static t_map	*get_map_info(int fd, t_map *map)
 	return (map);
 }
 
+/**
+ * Parse a line of the file and store the points in the map
+ * @param line The line to parse
+ * @param map The map
+ * @param x The x coordonate of the line
+ * @return TRUE if the line is parsed, FALSE otherwise
+*/
 static int	parse_line(char *line, t_map *map, size_t x)
 {
 	char	**elements;
@@ -55,6 +69,12 @@ static int	parse_line(char *line, t_map *map, size_t x)
 	return (TRUE);
 }
 
+/**
+ * Initialize the map
+ * @param fd The file descriptor of the file to parse
+ * @param map The map
+ * @return TRUE if the map is initialized, FALSE otherwise
+*/
 static int	init_map(int fd, t_map *map)
 {
 	char	*line;
@@ -73,6 +93,11 @@ static int	init_map(int fd, t_map *map)
 	return (TRUE);
 }
 
+/**
+ * Parse the file and create the map
+ * @param filename The name of the file to parse
+ * @return The map if the file is parsed, NULL otherwise
+*/
 t_map	*parse_map(char *filename)
 {
 	int		fd;
