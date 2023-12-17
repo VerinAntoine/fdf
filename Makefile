@@ -72,10 +72,10 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean $(NAME)
-
+	
 norm:
 	@echo '* Norminette'
 	make -C $(LIBFT_DIR) norm
-	norminette $(SRCS) $(INCLUDES)
+	norminette $(SRCS) $(INCLUDES)/fdf.h $(INCLUDES)/libft.h
 
 .PHONY: all clean fclean re relib cleanlib fcleanlib remlx cleanmlx fcleanmlx
