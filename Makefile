@@ -1,6 +1,6 @@
 NAME		= fdf
 CC			= cc
-CCFLAGS		= -Wall -Wextra -Werror -g3
+CCFLAGS		= -Wall -Wextra -Werror
 INCLUDES	= includes
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
