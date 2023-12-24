@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:02:15 by averin            #+#    #+#             */
-/*   Updated: 2023/12/15 13:01:45 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/24 15:23:24 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ int	handle_key_next(int keycode, t_data *data)
 		translate(data->map, (t_vec3){0, 0, -1});
 	if (keycode == XK_Right)
 		translate(data->map, (t_vec3){0, 0, 1});
+	if (keycode == XK_p)
+		data->color = change_color(data->color, 0);
+	if (keycode == XK_o)
+		data->color = change_color(data->color, 1);
+	if (keycode == XK_i)
+		data->color = change_color(data->color, 2);
+	if (keycode == XK_u)
+		data->color = change_color(data->color, 3);
 	return (0);
 }
 

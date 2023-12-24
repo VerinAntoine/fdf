@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:00:56 by averin            #+#    #+#             */
-/*   Updated: 2023/12/15 16:40:07 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/24 15:19:51 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_vec3	project(t_vec3 point)
 	return ((t_vec3){point.z + WIDTH / 2, point.y, point.x + HEIGHT / 2});
 }
 
-static void	draw_lines(t_map *origin, t_map *map, size_t c[2], t_img *img)
+static void	draw_lines(t_data *data, t_map *map, size_t c[2], t_img *img)
 {
 	t_vec3	*points[3];
 	int		colors[2];
@@ -30,14 +30,14 @@ static void	draw_lines(t_map *origin, t_map *map, size_t c[2], t_img *img)
 		return ;
 	if (points[1])
 	{
-		get_colors(*origin, get_point(origin, c[0], c[1])->y,
-			get_point(origin, c[0] - 1, c[1])->y, colors);
+		get_colors(*data, get_point(data->map, c[0], c[1])->y,
+			get_point(data->map, c[0] - 1, c[1])->y, colors);
 		draw_line(project(*points[0]), project(*points[1]), colors, img);
 	}
 	if (points[2])
 	{
-		get_colors(*origin, get_point(origin, c[0], c[1])->y,
-			get_point(origin, c[0], c[1] - 1)->y, colors);
+		get_colors(*data, get_point(data->map, c[0], c[1])->y,
+			get_point(data->map, c[0], c[1] - 1)->y, colors);
 		draw_line(project(*points[0]), project(*points[2]), colors, img);
 	}
 }
@@ -59,32 +59,34 @@ void	draw_fdf(t_data data, t_img *img)
 	{
 		y = -1;
 		while (++y < map->width)
-			draw_lines(data.map, map, (size_t [2]){x, y}, img);
+			draw_lines(&data, map, (size_t [2]){x, y}, img);
 	}
 	free_map(map);
 }
 
-static void	init_view(t_view *view, int size)
+static t_view	*init_view(t_view *view, int size)
 {
 	view->deg_x = 0;
 	view->deg_y = 45;
-	view->deg_z = 10;
+	view->deg_z = 35.274f;
 	view->scale = ft_max(HEIGHT, WIDTH) / size * 0.5f;
 	view->height = 1;
+	return (view);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_data	data;
 	t_view	view;
+	t_color	color;
 
 	if (argc != 2)
 		return (ft_dprintf(2, "Usage: %s <file.fdf>\n", argv[0]), -1);
 	data.map = parse_map(argv[1]);
 	if (!data.map)
 		return (-2);
-	init_view(&view, ft_max(data.map->width, data.map->height));
-	data.view = &view;
+	data.view = init_view(&view, ft_max(data.map->width, data.map->height));
+	data.color = change_color(&color, 0);
 	if (!create_window(&data))
 		return (free_map(data.map), ft_dprintf(2, "Couldn't create window\n"), \
 		-3);

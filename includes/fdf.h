@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:02:42 by averin            #+#    #+#             */
-/*   Updated: 2023/12/15 16:46:41 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/24 15:20:16 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ typedef struct s_matrix
 	t_vec3	k;
 }	t_matrix;
 
+typedef struct s_color
+{
+	int		start;
+	int		end;
+}	t_color;
+
 typedef struct s_view
 {
 	int		deg_x;
@@ -79,6 +85,7 @@ typedef struct s_data
 	void	*win_ptr;
 	t_map	*map;
 	t_view	*view;
+	t_color	*color;
 }	t_data;
 
 void	draw_fdf(t_data data, t_img *img);
@@ -97,7 +104,8 @@ void	translate(t_map *map, t_vec3 v);
 void	scale(t_map *map, t_vec3 v);
 
 int		lerp_color(int *colors, int start, int end, int current);
-void	get_colors(t_map map, int y0, int y1, int *colors);
+void	get_colors(t_data data, int y0, int y1, int *colors);
+t_color	*change_color(t_color *color, int id);
 
 t_map	*parse_map(char *filename);
 
