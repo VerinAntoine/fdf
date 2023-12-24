@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:00:56 by averin            #+#    #+#             */
-/*   Updated: 2023/12/24 15:39:45 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/24 15:43:31 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ int	main(int argc, char *argv[])
 	data.map = parse_map(argv[1]);
 	if (!data.map)
 		return (-2);
-	view.scale = ft_max(HEIGHT, WIDTH) /
-		ft_max(data.map->width, data.map->height) * 0.5f;
+	view.scale = ft_max(HEIGHT, WIDTH)
+		/ ft_max(data.map->width, data.map->height) * 0.5f;
 	view.height = 1;
 	data.view = change_projection(&view, PROJ_ISO);
 	data.color = change_color(&color, 0);
