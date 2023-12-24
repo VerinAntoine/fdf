@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:00:56 by averin            #+#    #+#             */
-/*   Updated: 2023/12/24 15:19:51 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/24 15:39:45 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,20 @@ void	draw_fdf(t_data data, t_img *img)
 	free_map(map);
 }
 
-static t_view	*init_view(t_view *view, int size)
+t_view	*change_projection(t_view *view, int projection)
 {
-	view->deg_x = 0;
-	view->deg_y = 45;
-	view->deg_z = 35.274f;
-	view->scale = ft_max(HEIGHT, WIDTH) / size * 0.5f;
-	view->height = 1;
+	if (projection == PROJ_ISO)
+	{
+		view->deg_x = 0;
+		view->deg_y = 45;
+		view->deg_z = 35.274f;
+	}
+	else if (projection == PROJ_TOP)
+	{
+		view->deg_x = 0;
+		view->deg_y = 0;
+		view->deg_z = 0;
+	}
 	return (view);
 }
 
@@ -85,7 +92,10 @@ int	main(int argc, char *argv[])
 	data.map = parse_map(argv[1]);
 	if (!data.map)
 		return (-2);
-	data.view = init_view(&view, ft_max(data.map->width, data.map->height));
+	view.scale = ft_max(HEIGHT, WIDTH) /
+		ft_max(data.map->width, data.map->height) * 0.5f;
+	view.height = 1;
+	data.view = change_projection(&view, PROJ_ISO);
 	data.color = change_color(&color, 0);
 	if (!create_window(&data))
 		return (free_map(data.map), ft_dprintf(2, "Couldn't create window\n"), \

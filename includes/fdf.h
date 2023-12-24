@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:02:42 by averin            #+#    #+#             */
-/*   Updated: 2023/12/24 15:20:16 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/24 15:39:37 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define AXIS_X 'x'
 # define AXIS_Y 'y'
 # define AXIS_Z 'z'
+# define PROJ_ISO 0
+# define PROJ_TOP 1
 
 typedef struct s_vec2
 {
@@ -89,6 +91,7 @@ typedef struct s_data
 }	t_data;
 
 void	draw_fdf(t_data data, t_img *img);
+t_view	*change_projection(t_view *view, int projection);
 
 int		create_window(t_data *data);
 void	delete_window(t_data data);

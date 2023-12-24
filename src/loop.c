@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:02:15 by averin            #+#    #+#             */
-/*   Updated: 2023/12/24 15:23:24 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/24 15:39:56 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	handle_key_next(int keycode, t_data *data)
 		data->color = change_color(data->color, 2);
 	if (keycode == XK_u)
 		data->color = change_color(data->color, 3);
+	if (keycode == XK_l)
+		data->view = change_projection(data->view, PROJ_ISO);
+	if (keycode == XK_k)
+		data->view = change_projection(data->view, PROJ_TOP);
 	return (0);
 }
 
