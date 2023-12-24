@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:02:15 by averin            #+#    #+#             */
-/*   Updated: 2023/12/24 15:39:56 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/24 15:46:13 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ int	loop_hook(t_data *data)
 void	init_hook(t_data *data)
 {
 	mlx_hook(data->win_ptr, DestroyNotify, 0, handle_destroy, data);
-	mlx_key_hook(data->win_ptr, handle_key, data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_key, data);
 	mlx_loop_hook(data->mlx_ptr, loop_hook, data);
 }
