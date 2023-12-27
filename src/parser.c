@@ -6,12 +6,11 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:02:16 by averin            #+#    #+#             */
-/*   Updated: 2023/12/15 16:38:54 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/27 13:53:41 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 /**
  * Get the point at the given coordonates

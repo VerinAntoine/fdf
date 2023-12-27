@@ -6,12 +6,11 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 09:00:56 by averin            #+#    #+#             */
-/*   Updated: 2023/12/24 15:43:31 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/27 13:53:37 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 static t_vec3	project(t_vec3 point)
 {
@@ -70,7 +69,7 @@ t_view	*change_projection(t_view *view, int projection)
 	{
 		view->deg_x = 0;
 		view->deg_y = 45;
-		view->deg_z = 35.274f;
+		view->deg_z = 35;
 	}
 	else if (projection == PROJ_TOP)
 	{
