@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:02:16 by averin            #+#    #+#             */
-/*   Updated: 2023/12/27 13:53:41 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/27 13:56:05 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ t_map	*parse_map(char *filename)
 		return (close(fd), ft_dprintf(2, "Memory error\n"), NULL);
 	get_map_info(fd, map);
 	close(fd);
+	if (map->width == 0 || map->height == 0)
+		return (free_map(map), ft_dprintf(2, "Invalid content\n"), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (free_map(map), ft_dprintf(2, "Invalid file name\n"), NULL);
