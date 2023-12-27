@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:02:16 by averin            #+#    #+#             */
-/*   Updated: 2023/12/27 13:56:05 by averin           ###   ########.fr       */
+/*   Updated: 2023/12/27 14:38:50 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,22 @@ static int	parse_line(char *line, t_map *map, size_t x)
 	t_vec3	*point;
 	size_t	y;
 
-	y = -1;
-	elements = ft_split(line, ' ');
+	elements = ft_size_split(line, ' ', &y);
 	if (!elements)
-		return (FALSE);
+		return (ft_dprintf(2, "Memory error\n"), FALSE);
+	if (y != map->width || ft_strncmp(elements[0], "\n", 1) == 0)
+		return (ft_dprintf(2, "Invalid content\n"), ft_free_split(elements),
+			FALSE);
+	y = -1;
 	while (elements[++y])
 	{
 		point = get_point(map, x, y);
 		point->x = x;
 		point->y = ft_atoi(elements[y]);
 		point->z = y;
+		if (point->y > 1000 || point->y < -1000)
+			return (ft_dprintf(2, "Invalid content\n"), ft_free_split(elements),
+				FALSE);
 	}
 	ft_free_split(elements);
 	return (TRUE);
@@ -86,7 +92,7 @@ static int	init_map(int fd, t_map *map)
 	while (oget_next_line(fd, &line))
 	{
 		if (!parse_line(line, map, x++))
-			return (ft_dprintf(2, "Memory error\n"), FALSE);
+			return (free(line), FALSE);
 		free(line);
 	}
 	return (TRUE);
